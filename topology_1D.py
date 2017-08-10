@@ -3,8 +3,8 @@ from mpi4py import MPI
 
 class topology:
 	def __init__(self,noCeldasx, halo):
-		comm = MPI.COMM_WORLD
 		global comm
+		comm = MPI.COMM_WORLD
 
 		self.noProcs = comm.Get_size()
 		self.rank = comm.Get_rank()

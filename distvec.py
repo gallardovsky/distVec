@@ -4,8 +4,8 @@ import numpy as np
 
 class distvec:
 	def __init__(self, ptrTopo, vector):
-		comm = MPI.COMM_WORLD
 		global comm
+		comm = MPI.COMM_WORLD
 
 		self.vecPart = np.zeros(ptrTopo.vecRange)
 

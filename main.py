@@ -1,12 +1,8 @@
 import numpy as np
 from topology_1D import *
 from distvec import *
-from mpi4py import MPI
 
-noCeldasx = 10
-halo = 1
-
-topo = topology(noCeldasx,halo)
+topo = topology(noCeldasx=10,halo=1)
 
 #topo.printTopology()
 
