@@ -4,6 +4,8 @@ from mpi4py import MPI
 class topology:
 	def __init__(self,noCeldasx, halo):
 		comm = MPI.COMM_WORLD
+		global comm
+
 		self.noProcs = comm.Get_size()
 		self.rank = comm.Get_rank()
 		self.offSet = np.zeros(self.noProcs)
@@ -51,17 +53,17 @@ class topology:
 			self.hStartE =  self.hEndW
 			self.hEndE = self.hStartE + halo
 
-			self.intFstartW =  self.lIterstart 
-			self.intFendW = self.intFstartW 
+			self.intFstartW =  self.lIterstart
+			self.intFendW = self.intFstartW
 
 			self.intFstartE = self.lIterend - halo
 			self.intFendE = self.lIterend
 
 # -------------------------------------------
 			for i in range(self.rank):
-				self.ownedAll += int(self.offSet[i]) 
+				self.ownedAll += int(self.offSet[i])
 
-			self.globalIterstart = self.lIterstart + self.ownedAll 
+			self.globalIterstart = self.lIterstart + self.ownedAll
 			self.globalIterend = self.globalIterstart + self.owned
 
 
@@ -86,7 +88,7 @@ class topology:
 			self.hStartE =  self.hEndW
 			self.hEndE = self.hStartE + halo
 
-			self.intFstartW =  self.lIterstart 
+			self.intFstartW =  self.lIterstart
 			self.intFendW = self.intFstartW + halo
 			self.intFstartE = self.lIterend - halo
 			self.intFendE = self.lIterend
@@ -95,7 +97,7 @@ class topology:
 				self.ownedAll += int(self.offSet[i])
 
 
-			self.globalIterstart = self.lIterstart + self.ownedAll 
+			self.globalIterstart = self.lIterstart + self.ownedAll
 			self.globalIterend = self.globalIterstart + self.owned
 
 
@@ -119,7 +121,7 @@ class topology:
 			self.hStartE =  self.hEndW
 			self.hEndE = self.hStartE
 
-			self.intFstartW =  self.lIterstart 
+			self.intFstartW =  self.lIterstart
 			self.intFendW = self.intFstartW + halo
 			self.intFstartE = self.lIterend
 			self.intFendE = self.intFstartE
@@ -127,17 +129,17 @@ class topology:
 			for i in range(self.rank):
 				self.ownedAll += int(self.offSet[i])
 
-			self.globalIterstart = self.lIterstart + self.ownedAll 
+			self.globalIterstart = self.lIterstart + self.ownedAll
 			self.globalIterend = self.globalIterstart + self.owned
 
 #		print 'offSet = ', self.offSet
 
 	def printTopology(self):
 		for i in range(self.noProcs):
+			comm.Barrier()
 			if self.rank == i:
 				print ''
-				print 'Proc = ', self.rank
-				print '------------------------------'
+				print '-----Proc = ',self.rank,'----------'
 				print 'neighborW = ', self.neighborW
 				print 'neighborE = ', self.neighborE
 				print 'owned = ', self.owned
@@ -145,16 +147,16 @@ class topology:
 				print '--------Iter locales---------'
 				print 'lIterstart = ', self.lIterstart
 				print 'lIterend = ', self.lIterend
-				print '---------Iter Halos---'
+				print '---------Iter Halos--------'
 				print 'hStartW = ', self.hStartW
 				print 'hEndW = ', self.hEndW
 				print 'hStartE =', self.hStartE
 				print 'hEndE =', self.hEndE
 #				print '---------Interface-----------'
-#				print 'intFstartW = ',  self.intFstartW 
+#				print 'intFstartW = ',  self.intFstartW
 #				print 'intFendW = ', self.intFendW
-#				print 'intFstartE = ', self.intFstartE 
+#				print 'intFstartE = ', self.intFstartE
 #				print 'intFendE = ', self.intFendE
-				print '----------Iter Globales ------'
+				print '----------Iter Globales --------'
 				print 'globalIterstart = ', self.globalIterstart
 				print 'globalIterend = ', self.globalIterend

@@ -14,7 +14,8 @@ vector = np.zeros(10)
 
 bla = distvec(topo, vector)
 
+bla.printVec(topo)
+
 bla.updateHalo(topo)
 
-bla.printVec()
-
+bla.printVec(topo)
