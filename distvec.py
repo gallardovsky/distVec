@@ -8,7 +8,7 @@ class distvec:
 		comm = MPI.COMM_WORLD
 
 		self.vecPart = np.zeros(ptrTopo.vecRange)
-
+print
 # reparte el vector ingresado en los procesadores
 		i = 0
 		for j in range(ptrTopo.globalIterstart, ptrTopo.globalIterend):
@@ -16,7 +16,6 @@ class distvec:
 			i += 1
 
 	def updateHalo(self, ptrTopo):
-		comm = MPI.COMM_WORLD
 		if ptrTopo.neighborW != -1:
 # si tiene vecino W entonces envia la parte Interface hacia el vecino y espera recibir el interface del vecino
 			comm.send(self.vecPart[ptrTopo.intFstartW:ptrTopo.intFendW], dest = ptrTopo.neighborW)

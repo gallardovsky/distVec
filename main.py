@@ -2,16 +2,25 @@ import numpy as np
 from topology_1D import *
 from distvec import *
 
-topo = topology(noCeldasx=10,halo=1)
+# --------------- Parametros ---------------
+noCeldasx = 11
+halo = 1
 
-#topo.printTopology()
+# se instancia la topologia
+topo = topology(noCeldasx, halo)
 
-vector = np.zeros(10)
+# imprime la topologia
+topo.printTopology()
 
-bla = distvec(topo, vector)
+# si instancia la distribucion del vector
+#bla = distvec(topo, vector)
 
-bla.printVec(topo)
+# esta primera llamda del metodo printVec, imprime los vectores distribuidos pero
+# sin comunicar los interface con los halos
+#bla.printVec(topo)
 
-bla.updateHalo(topo)
+# updatea los halos
+#bla.updateHalo(topo)
 
-bla.printVec(topo)
+# imprime el vector ya updateado
+#bla.printVec(topo)
